@@ -1,18 +1,11 @@
-%%%-------------------------------------------------------------------
-%%% File    : tcpip2http.erl
-%%% Author  : houdini <dmitrii.golub@gmail.com>
-%%% Description : 
-%%%
-%%% Created :  9 Mar 2009 by houdini <dmitrii.golub@gmail.com>
-%%%-------------------------------------------------------------------
--module(tcpip2http).
+-module(b52_tcpip2http).
 
 %% API
 %%-export([]).
 -compile(export_all).
 
 get_http(URL) ->
-    {ok, {CleanUrl, Host, Path, File}} = url_parser:parse([URL]),
+    {ok, {CleanUrl, Host, Path, File}} = b52_url_parser:parse([URL]),
     case gen_tcp:connect(Host, 80, [binary, {packet, 0}]) of
 	{ok, Socket} ->
 	    Command = "GET " ++ CleanUrl ++ " HTTP/1.1\r\nHost: http://www." ++ Host ++ "\r\n\r\n",

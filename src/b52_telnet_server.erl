@@ -1,4 +1,4 @@
--module(telnet_server).
+-module(b52_telnet_server).
 -compile(export_all).
 
 -define(TCP_OPTIONS,[list, {packet, 0}, {active, false}, {reuseaddr, true}]).
@@ -24,6 +24,7 @@ do_accept(LSocket) ->
 do_echo(Socket) ->
     case gen_tcp:recv(Socket, 0) of
         {ok, Data} ->
+	    
 	    %%io:format("Data length: ~p~n", [length(Data)]),
 %%            io:format("I get: ~p~n", [Data]),
 %%	    tcpip2http:get_http(Data),

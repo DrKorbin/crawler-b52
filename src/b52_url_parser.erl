@@ -1,12 +1,4 @@
-%%%-------------------------------------------------------------------
-%%% File    : url_parser.erl
-%%% Author  : houdini <dmitrii.golub.gmail.com>
-%%% Description : handle urls
-%%%
-%%% Created :  8 Mar 2009 by houdini <dmitrii.golub.gmail.com>
-%%%-------------------------------------------------------------------
-
--module(url_parser).
+-module(b52_url_parser).
 
 %% API
 -export([parse/1]).
