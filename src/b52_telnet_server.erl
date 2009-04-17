@@ -1,4 +1,5 @@
 -module(b52_telnet_server).
+-vsn('0.1').
 -compile(export_all).
 
 -define(TCP_OPTIONS,[list, {packet, 0}, {active, false}, {reuseaddr, true}]).

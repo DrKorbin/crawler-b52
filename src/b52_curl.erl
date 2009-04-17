@@ -1,9 +1,9 @@
 -module(b52_curl).
-
+-vsn['0.1'].
 -behaviour(gen_server).
 
 %% API
--export([start/0, stop/0, get_and_save/1, do/1]).
+-export([start/0, stop/0, do/1]).
 
 %% gen_server callbacks
 -export([init/1, handle_call/3, handle_cast/2, handle_info/2,
@@ -17,20 +17,21 @@
 %%====================================================================
 
 start() ->
-    gen_server:start_link({local, ?SERVER}, ?MODULE, [], []).
+    gen_server:start_link({global, ?SERVER}, ?MODULE, [], []).
 
 stop() ->
-    gen_server:cast(?SERVER, stop).
+    gen_server:cast({global, ?SERVER}, stop).
 
 do(Url) ->
-    gen_server:cast(?SERVER, {download_page, Url}).
+    gen_server:cast({global, ?SERVER}, {download_page, Url}).
 
 
 %%====================================================================
 %% SERVER
 %%====================================================================
 init([]) ->
-    inets:start(),
+    process_flag(trap_exit, true),
+    io:format("~p (~p) starting...~n", [?MODULE, self()]),
     {ok, []}.
 
 handle_call(_Request, _From, State) ->

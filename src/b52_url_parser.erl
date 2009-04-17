@@ -1,5 +1,5 @@
 -module(b52_url_parser).
-
+-vsn['0.1'].
 %% API
 -export([parse/1]).
 

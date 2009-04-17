@@ -1,5 +1,5 @@
 -module(b52_tcpip2http).
-
+-vsn('0.1').
 %% API
 %%-export([]).
 -compile(export_all).
@@ -11,7 +11,7 @@ get_http(URL) ->
 	    Command = "GET " ++ CleanUrl ++ " HTTP/1.1\r\nHost: http://www." ++ Host ++ "\r\n\r\n",
 	    ok = gen_tcp:send(Socket, Command),
 	    {ok, Bin} = binary_receiver(Socket, list_to_binary([])),
-	    DirectoryToSave = "/home/houdini/myErlang/crawler/wwwdata/"++Host++"/"++Path,
+	    DirectoryToSave = b52_config:get(where_to_save_web)++Host++"/"++Path,
 	    filelib:ensure_dir(DirectoryToSave),
 	    egd:save(Bin, DirectoryToSave ++ File),
 	    ok = gen_tcp:close(Socket);

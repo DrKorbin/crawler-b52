@@ -1,3 +1,6 @@
-his is a crawler that is being developed by some students from Data Analyze School.
-We want to get into shape this project because it is our first joint project and because we want to get a credit for industrial programming.
-Our crawler is supposed to go round sites and download pages.
+For this moment crawler do not download web sites, it is in intensive development.
+
+To compile it run make
+To start crawler run start
+
+Stopping crawler is possible by killing process with id, you can find with ps -ax | grep crawler_system

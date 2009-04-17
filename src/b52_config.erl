@@ -13,17 +13,19 @@
 -define(CONFIG_TABLE, tb_config).
 
 start() ->
-    gen_server:start_link({local, ?SERVER}, ?MODULE, [], []).
+    gen_server:start_link({global, ?SERVER}, ?MODULE, [], []).
 
 stop() ->
-    gen_server:cast(?SERVER, stop).
+    gen_server:cast({global, ?SERVER}, stop).
 
 get(Key) ->
-    gen_server:call(?SERVER, {get, Key}).
-
+    {_, {_, Res}} = gen_server:call({global, ?SERVER}, {get, Key}),
+    Res.
 
 init(_) ->
+    process_flag(trap_exit, true),
     ok = load_config(),
+    io:format("~p (~p) starting...~n", [?MODULE, self()]),
     {ok, []}.
 
 handle_call({get, Key}, _From, State) ->

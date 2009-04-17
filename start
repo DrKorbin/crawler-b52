@@ -1,0 +1,13 @@
+#!/bin/bash
+#
+# Author: Dmitrii Golub
+# Date: 17.04.2009
+#
+# Purpose: Start crawler on 9999 port
+#
+#
+
+cd ebin/
+erl -detached -s crawler -sname crawler_system
+
+#END
